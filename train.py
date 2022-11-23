@@ -83,7 +83,8 @@ if os.path.exists(check_point_path) and not retrain_model:
     net.load_state_dict(torch.load(check_point_path))
 else:
     optimizer = torch.optim.Adam(net.parameters(), lr=lr)
-    loss = nn.MSELoss()
+    # loss = nn.MSELoss()
+    loss = nn.L1Loss()
     scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=lr_decay_steps, gamma=gamma)
 
     # 记录超参
