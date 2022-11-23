@@ -97,7 +97,7 @@ if not os.path.exists(check_point_path):
 
 TEST_DATA = 1
 df_test = get_data(TEST_DATA)
-test_dataloader = get_dataloader(batch_size, df_test)
+test_dataloader = get_dataloader(batch_size, df_test, is_train=False)
 
 predict(test_dataloader, net, log_dir, price_mean, price_std, batch_size)
 print("-" * 10)

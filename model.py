@@ -26,10 +26,10 @@ class MyModel(nn.Module):
         return x
 
 
-def get_dataloader(batch_size, *df_data):
+def get_dataloader(batch_size, *df_data, is_train=True):
     tensor_list = list()
     for i in range(len(df_data)):
         tensor_list.append(torch.tensor(df_data[i].values, dtype=torch.float32))
     my_dataset = TensorDataset(*tensor_list)
-    my_dataloader = DataLoader(my_dataset, batch_size=batch_size, shuffle=True)
+    my_dataloader = DataLoader(my_dataset, batch_size=batch_size, shuffle=is_train)
     return my_dataloader
