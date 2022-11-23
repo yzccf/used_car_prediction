@@ -41,7 +41,7 @@ df_y = (df_y - price_mean) / price_std
 
 in_feature = df_train.values.shape[1]
 
-my_dataloader = get_dataloader(batch_size, df_train[:10000], df_y[:10000])
+my_dataloader = get_dataloader(batch_size, df_train, df_y)
 
 # df_train 内存释放
 df_train = None
