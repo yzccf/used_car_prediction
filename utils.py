@@ -21,15 +21,6 @@ def data_process(df_data, is_train=True):
     # 替换掉空值之后取得从车注册到卖出的时间
     df_data['used_time'] = df_data['creatDate'] - df_data['regDate']
 
-    # 认为与price相关程度的绝对值小于 0.05 的不显著相关
-    global corr_low_columns
-    if is_train:
-        corr_data = df_data.corr()
-        corr_low_columns = df_data.columns[corr_data.loc['price'].abs() < 0.05]
-    else:
-        assert corr_low_columns is not None, "train data process must be run first"
-    df_data.drop(corr_low_columns, axis=1, inplace=True)
-
     # 此外观察到creatDate相关度基本为0，因此regDate和used_time保留一个即可
     df_data.drop(['regDate'], axis=1, inplace=True)
 
@@ -47,6 +38,9 @@ FOUT = None
 
 def log_string(out_str, log_dir):
     global FOUT
+    if not log_dir:
+        print(out_str)
+        return
     if not os.path.exists(log_dir):
         os.mkdir(log_dir)
     if not FOUT:

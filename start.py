@@ -1,14 +1,9 @@
-数据下载见[北航云盘](https://bhpan.buaa.edu.cn:443/link/3198637693396F7805FC058A54AC9A8A) ，并放在./car_data/ 文件夹中。
+import argparse
 
-文件输出将放在./log/ 中
+from machine_learning.predict import predict
+from machine_learning.train import train
 
-训练过程：在项目根目录
-~~~bash
-python start.py --retrain_model=True
-~~~
-
-参数见:
-```python
+parser = argparse.ArgumentParser()
 parser.add_argument('--log_dir', default='./log/', help='Dump dir to save model checkpoint or log '
                                                         '[example: ./log/]')
 parser.add_argument('--max_epoch', type=int, default=100, help='Epoch to run [default: 100]')
@@ -19,9 +14,8 @@ parser.add_argument('--lr_decay_steps', type=int, default=10,
                     help='When to decay the learning rate (in epochs) [default: 10]')
 parser.add_argument('--retrain_model', type=bool, default=False,
                     help='Either to read the checkpoint or not [default: False]')
-```
 
-现在要做的：
-1. 划分测试集
-2. 如果没过拟合，就加网络结构，比如残差；如果过拟合，加正则或者DropOut
-3. ensemble
+FLAGS = parser.parse_args()
+
+train(FLAGS)
+predict(FLAGS)
