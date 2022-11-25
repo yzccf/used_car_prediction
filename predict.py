@@ -35,17 +35,17 @@ def predict(FLAGS):
     LOG_DIR = FLAGS.log_dir
     batch_size = FLAGS.batch_size
 
-    df_test = get_data(TEST_DATA_INDEX)
+    df_pred = get_data(TEST_DATA_INDEX)
 
     check_point_path = LOG_DIR + '/check_point.pt'
     assert os.path.exists(check_point_path), "未找到模型参数，可能是未执行过train就直接predict"
 
     load_dict = torch.load(check_point_path)
     corr_low_columns = load_dict["corr_low_columns"]
-    df_test.drop(corr_low_columns, axis=1, inplace=True)
-    test_dataloader = get_dataloader(batch_size, df_test, is_train=False)
+    df_pred.drop(corr_low_columns, axis=1, inplace=True)
+    test_dataloader = get_dataloader(batch_size, df_pred, is_train=False)
 
-    in_feature = df_test.shape[1]
+    in_feature = df_pred.shape[1]
     net = MyModel([in_feature, 64, 32, 8, 1]).to(DEVICE)
 
     net.load_state_dict(load_dict["net.state_dict()"])

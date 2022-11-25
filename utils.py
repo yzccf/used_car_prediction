@@ -2,8 +2,8 @@ import pandas as pd
 import numpy as np
 import os
 import time
-
-corr_low_columns = None
+from sklearn.utils import shuffle
+from numpy import random
 
 
 def data_process(df_data, is_train=True):
@@ -59,3 +59,10 @@ def get_data(type: int):
         return data_process(df_data)
     else:
         return data_process(df_data, False)
+
+
+def data_split(df_data: 'pd.DataFrame', seed=666, train_threshold=0.8):
+    random.seed(seed)
+    df_data = shuffle(df_data)
+    num = int(df_data.shape[0] * train_threshold)
+    return df_data.iloc[:num], df_data.iloc[num:]
