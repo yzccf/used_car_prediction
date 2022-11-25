@@ -22,6 +22,6 @@ parser.add_argument('--retrain_model', type=bool, default=False,
 ```
 
 现在要做的：
-1. 划分测试集
+1. 划分测试集 √
 2. 如果没过拟合，就加网络结构，比如残差；如果过拟合，加正则或者DropOut
 3. ensemble
