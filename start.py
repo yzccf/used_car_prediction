@@ -1,7 +1,7 @@
 import argparse
 
-from machine_learning.predict import predict
-from machine_learning.train import train
+from predict import predict
+from train import train
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--log_dir', default='./log/', help='Dump dir to save model checkpoint or log '

@@ -1,6 +1,6 @@
 import torch
 
-from machine_learning.utils import log_string
+from utils import log_string
 
 DEVICE = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 

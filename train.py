@@ -2,7 +2,7 @@ import os
 import torch
 from torch import nn
 
-from machine_learning.test import get_accuracy
+from test import get_accuracy
 from utils import get_data, log_string, data_split
 from tqdm import tqdm
 from model import MyModel, get_dataloader
