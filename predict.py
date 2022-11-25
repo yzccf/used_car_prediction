@@ -34,6 +34,7 @@ def predict(FLAGS):
     global LOG_DIR
     LOG_DIR = FLAGS.log_dir
     batch_size = FLAGS.batch_size
+    mlps = FLAGS.mlps.copy()
 
     df_pred = get_data(TEST_DATA_INDEX)
 
@@ -46,7 +47,8 @@ def predict(FLAGS):
     test_dataloader = get_dataloader(batch_size, df_pred, is_train=False)
 
     in_feature = df_pred.shape[1]
-    net = MyModel([in_feature, 64, 32, 8, 1]).to(DEVICE)
+    mlps.insert(0, in_feature)
+    net = MyModel(mlps).to(DEVICE)
 
     net.load_state_dict(load_dict["net.state_dict()"])
     price_mean = load_dict["price_mean"]

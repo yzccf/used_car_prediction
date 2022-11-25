@@ -14,6 +14,9 @@ parser.add_argument('--lr_decay_steps', type=int, default=10,
                     help='When to decay the learning rate (in epochs) [default: 10]')
 parser.add_argument('--retrain_model', type=bool, default=False,
                     help='Either to read the checkpoint or not [default: False]')
+parser.add_argument('--mlps', type=int, default=[64, 32, 8, 1], nargs='+',
+                    help='Linear layer structure in MyModel [default: 64 32 8 1]]')
+
 
 FLAGS = parser.parse_args()
 

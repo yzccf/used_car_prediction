@@ -42,6 +42,7 @@ def train(FLAGS):
     gamma = FLAGS.lr_decay_rates
     LR_DECAY_STEPS = FLAGS.lr_decay_steps
     retrain_model = FLAGS.retrain_model
+    mlps = FLAGS.mlps.copy()
 
     TRAIN_DATA_INDEX = 0
     # 数据处理
@@ -64,7 +65,8 @@ def train(FLAGS):
     test_dataloader = get_dataloader(batch_size, df_test, df_test_y)
 
     in_feature = df_train.shape[1]
-    net = MyModel([in_feature, 64, 32, 8, 1]).to(DEVICE)
+    mlps.insert(0, in_feature)
+    net = MyModel(mlps).to(DEVICE)
     optimizer = torch.optim.Adam(net.parameters(), lr=lr)
     # loss = nn.MSELoss()
     loss = nn.L1Loss()
