@@ -67,7 +67,7 @@ def train(FLAGS):
     in_feature = df_train.shape[1]
     mlps.insert(0, in_feature)
     net = MyModel(mlps).to(DEVICE)
-    optimizer = torch.optim.Adam(net.parameters(), lr=lr, weight_decay=0.01)
+    optimizer = torch.optim.SGD(net.parameters(), lr=lr, weight_decay=0.01)
     # loss = nn.MSELoss()
     loss = nn.L1Loss()
 
