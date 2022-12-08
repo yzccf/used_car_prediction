@@ -23,11 +23,6 @@ parser.add_argument('--mlps', type=int, default=[64, 32, 8, 1], nargs='+',
                     help='Linear layer structure in MyModel [default: 64 32 8 1]]')
 ```
 
-现在要做的：
-1. 划分测试集 √
-2. 如果没过拟合，就加网络结构，比如残差；如果过拟合，加正则或者DropOut √
-3. ensemble
-
 过程记录：
 1. 先是自己写的dataset和dataloader读取数据，发现不能收敛。暂未找到原因。
 2. 由于自身笔记本的性能原因，用12w个训练数据中的1w个进行训练，得到MAE大概750。
